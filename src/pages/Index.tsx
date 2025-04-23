@@ -74,8 +74,6 @@ const Index = () => {
         <Features />
         <VehicleShowcase />
         <VehicleStory />
-        <ServicesSection />
-        <PricingSection />
       </main>
       <Footer />
       <ScrollToTopButton />
