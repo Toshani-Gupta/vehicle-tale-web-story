@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import NotFound from "./pages/NotFound";
 import Resources from "./pages/Resources";
 import SignIn from "./pages/SignIn";
+import Account from "./pages/Account";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/services" element={<Services />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/account" element={<Account />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
