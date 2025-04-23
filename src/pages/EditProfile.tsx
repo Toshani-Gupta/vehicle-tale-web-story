@@ -5,22 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { User, Mail, Lock, Phone, Car, UserCircle2 } from "lucide-react";
+import { User, Mail, Phone, UserCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
-import { authAPI } from "@/lib/api";
-
-const initialState = {
-  username: "",
-  email: "",
-  password: "",
-  name: "",
-  contactEmail: "",
-  phone: "",
-  cars: "",
-  gender: "",
-  needs: "",
-};
+import { useAuth } from "@/contexts/AuthContext";
 
 const genders = [
   { label: "Male", value: "male", icon: <User className="mr-1 h-4 w-4" /> },
@@ -28,45 +16,39 @@ const genders = [
   { label: "Other", value: "other", icon: <UserCircle2 className="mr-1 h-4 w-4" /> },
 ];
 
-export default function SignIn() {
-  const [form, setForm] = useState(initialState);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState("");
+export default function EditProfile() {
+  const { user, updateProfile } = useAuth();
   const navigate = useNavigate();
+  const [form, setForm] = useState({
+    name: user?.name || "",
+    contactEmail: user?.contactEmail || "",
+    phone: user?.phone || "",
+    gender: user?.gender || "",
+    needs: user?.needs || "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRadioChange = (field: string, value: string) => {
-    setForm({ ...form, [field]: value });
+  const handleRadioChange = (value: string) => {
+    setForm({ ...form, gender: value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
     setError("");
 
     try {
-      const response = await authAPI.register({
-        username: form.username,
-        email: form.email,
-        password: form.password,
-        name: form.name,
-        contactEmail: form.contactEmail,
-        phone: form.phone,
-        gender: form.gender,
-        needs: form.needs
-      });
-
-      if (response.token) {
-        setTimeout(() => {
-          navigate("/");
-        }, 1000);
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || "An error occurred during registration");
-      setSubmitted(false);
+      await updateProfile(form);
+      navigate('/account');
+    } catch (err: any) {
+      setError(err.response?.data?.message || "An error occurred while updating profile");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -76,59 +58,10 @@ export default function SignIn() {
       <div className="flex items-center justify-center min-h-[90vh] bg-gradient-to-br from-vehicle-primary/10 via-white to-vehicle-accent/10 px-2 py-8 pt-20">
         <Card className="max-w-xl w-full shadow-lg animate-fade-from-bottom">
           <CardHeader>
-            <CardTitle className="text-center text-2xl">Sign In / Register</CardTitle>
+            <CardTitle className="text-center text-2xl">Edit Profile</CardTitle>
           </CardHeader>
           <CardContent>
             <form className="space-y-4" onSubmit={handleSubmit}>
-              <div>
-                <Label htmlFor="username">Username</Label>
-                <div className="flex items-center gap-2">
-                  <User className="h-5 w-5 text-muted-foreground" />
-                  <Input
-                    id="username"
-                    type="text"
-                    name="username"
-                    value={form.username}
-                    onChange={handleChange}
-                    placeholder="Choose a username"
-                    required
-                    autoComplete="username"
-                  />
-                </div>
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <div className="flex items-center gap-2">
-                  <Mail className="h-5 w-5 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    placeholder="you@email.com"
-                    required
-                    autoComplete="email"
-                  />
-                </div>
-              </div>
-              <div>
-                <Label htmlFor="password">Password</Label>
-                <div className="flex items-center gap-2">
-                  <Lock className="h-5 w-5 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type="password"
-                    name="password"
-                    value={form.password}
-                    onChange={handleChange}
-                    placeholder="Set your password"
-                    required
-                    autoComplete="new-password"
-                  />
-                </div>
-              </div>
-              <hr className="my-1" />
               <div>
                 <Label htmlFor="name">Full Name</Label>
                 <div className="flex items-center gap-2">
@@ -176,26 +109,11 @@ export default function SignIn() {
                 </div>
               </div>
               <div>
-                <Label htmlFor="cars">Cars</Label>
-                <div className="flex items-center gap-2">
-                  <Car className="h-5 w-5 text-muted-foreground" />
-                  <Input
-                    id="cars"
-                    type="text"
-                    name="cars"
-                    value={form.cars}
-                    onChange={handleChange}
-                    placeholder="Vehicle(s) owned/interested"
-                    required
-                  />
-                </div>
-              </div>
-              <div>
                 <Label>Gender</Label>
                 <div className="mt-2">
                   <RadioGroup
                     value={form.gender}
-                    onValueChange={val => handleRadioChange("gender", val)}
+                    onValueChange={handleRadioChange}
                     className="flex space-x-4"
                     required
                   >
@@ -225,16 +143,27 @@ export default function SignIn() {
               {error && (
                 <div className="text-red-500 text-sm text-center">{error}</div>
               )}
-              <Button type="submit" className="w-full mt-2 bg-vehicle-accent hover:bg-vehicle-accent/90 text-white" disabled={submitted}>
-                {submitted ? "Processing..." : "Sign In / Register"}
-              </Button>
-              {submitted && !error && (
-                <div className="text-center text-green-700 mt-2">Registration successful! Redirecting...</div>
-              )}
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => navigate('/account')}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  className="flex-1 bg-vehicle-accent hover:bg-vehicle-accent/90 text-white"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Saving..." : "Save Changes"}
+                </Button>
+              </div>
             </form>
           </CardContent>
         </Card>
       </div>
     </>
   );
-}
+} 
