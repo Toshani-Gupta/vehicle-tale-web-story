@@ -2,10 +2,7 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
-import ServicesSection from "@/components/ServicesSection";
 import VehicleShowcase from "@/components/VehicleShowcase";
-import VehicleStory from "@/components/VehicleStory";
-import PricingSection from "@/components/PricingSection";
 import Footer from "@/components/Footer";
 
 const ScrollToTopButton = () => {
@@ -73,7 +70,6 @@ const Index = () => {
         <Hero />
         <Features />
         <VehicleShowcase />
-        <VehicleStory />
       </main>
       <Footer />
       <ScrollToTopButton />
