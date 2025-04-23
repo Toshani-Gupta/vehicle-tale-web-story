@@ -63,9 +63,11 @@ const Header = () => {
         </div>
 
         <div className="flex items-center">
-          <Button className="bg-vehicle-accent hover:bg-opacity-90 text-white rounded-md transition duration-200">
-            GET STARTED
-          </Button>
+          <Link to="/sign-in">
+            <Button className="bg-vehicle-accent hover:bg-opacity-90 text-white rounded-md transition duration-200">
+              GET STARTED
+            </Button>
+          </Link>
           <button 
             className="ml-4 md:hidden" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -98,6 +100,10 @@ const Header = () => {
             <Link to="/account" className="flex items-center hover:text-vehicle-secondary transition duration-200">
               <User className="mr-2 h-4 w-4" />
               <span>ACCOUNT</span>
+            </Link>
+            <Link to="/sign-in" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+              <User className="mr-2 h-4 w-4" />
+              <span>GET STARTED</span>
             </Link>
           </nav>
         </div>
