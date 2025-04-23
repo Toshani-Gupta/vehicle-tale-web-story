@@ -1,54 +1,6 @@
-# Welcome to your Lovable project
+# 🚗 Vehicle Registration System
 
-## Project info
-
-**URL**: https://lovable.dev/projects/03f9de30-0db7-483e-9346-8b1f5435e2bf
-
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/03f9de30-0db7-483e-9346-8b1f5435e2bf) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+A full-stack web application that allows users to register vehicles, manage contact details, and log service history.
 
 ## What technologies are used for this project?
 
@@ -60,14 +12,99 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/03f9de30-0db7-483e-9346-8b1f5435e2bf) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## 📋 Features
 
-Yes, you can!
+- Register a user with login credentials
+- Submit contact information
+- Register a vehicle with VIN and license plate
+- Record a service performed, cost, mileage, and future service date
+- Frontend form validation
+- Responsive UI with smooth animations
+- Backend validation and database storage
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 🛠️ Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/vehicle-registration-system.git
+cd vehicle-registration-system
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install express mysql2
+```
+
+### 3. Configure MySQL Database
+
+1. Create a MySQL database and user.
+2. Use the following schema (adjust if needed):
+
+```sql
+-- Create tables based on your existing structure (example snippet)
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at DATETIME NOT NULL,
+  updated_at DATETIME
+);
+
+-- Add vehicles, contacts, services (as seen in your provided schema screenshots)
+```
+
+3. Update database credentials in `server.js`:
+
+```js
+const db = await mysql.createConnection({
+    host: 'localhost',
+    user: 'your_db_user',
+    password: 'your_db_password',
+    database: 'your_db_name'
+});
+```
+
+### 4. Run the Server
+
+```bash
+node server.js
+```
+
+The server will run on [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🔧 Development Notes
+
+- Make sure your MySQL server is running.
+- The form is submitted via AJAX, so the page won't reload.
+- Backend handles user and service relationships with `user_id` and `vehicle_id`.
+
+---
+
+## 📸 Screenshots
+
+_(Include screenshots here if you want to showcase the UI)_
+
+---
+
+## 📄 License
+
+MIT License. Free for personal and commercial use.
+
+---
+
+## 👨‍💻 Author
+
+Made with ❤️ by Toshani
+
+
+
