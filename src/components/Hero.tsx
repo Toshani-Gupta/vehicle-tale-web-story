@@ -59,7 +59,7 @@ const Hero = () => {
           }`}
           onClick={scrollToContent}
         >
-          <ChevronDown className="h-10 w-10 text-white" />
+          <ChevronDown className="h-10 w-10 text-white mx-auto" />
         </div>
       </div>
       
@@ -72,3 +72,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
