@@ -1,9 +1,7 @@
-
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
-import StorySection from "@/components/StorySection";
 import ServicesSection from "@/components/ServicesSection";
 import VehicleShowcase from "@/components/VehicleShowcase";
 import VehicleStory from "@/components/VehicleStory";
@@ -52,7 +50,6 @@ const ScrollToTopButton = () => {
 
 const Index = () => {
   useEffect(() => {
-    // Preload images
     const imageUrls = [
       "/lovable-uploads/b38d8360-631e-4d70-baa1-1674944d7c68.png",
       "/lovable-uploads/8b6ce849-525d-4a9a-b2f1-4cecd55c6e93.png",
@@ -77,7 +74,6 @@ const Index = () => {
         <Features />
         <VehicleShowcase />
         <VehicleStory />
-        <StorySection />
         <ServicesSection />
         <PricingSection />
       </main>

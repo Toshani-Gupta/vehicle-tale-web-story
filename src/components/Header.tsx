@@ -1,10 +1,10 @@
-
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, Home, User, FileText, Bookmark } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Header = () => {
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
