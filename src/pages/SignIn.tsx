@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -5,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { User, Mail, Lock, Phone, Car, UserCircle2, Building2, Clipboard } from "lucide-react";
+import { User, Mail, Lock, Phone, Car, UserCircle2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const initialState = {
@@ -17,7 +18,6 @@ const initialState = {
   phone: "",
   cars: "",
   gender: "",
-  account_type: "",
   needs: "",
 };
 
@@ -25,18 +25,6 @@ const genders = [
   { label: "Male", value: "male", icon: <User className="mr-1 h-4 w-4" /> },
   { label: "Female", value: "female", icon: <User className="mr-1 h-4 w-4" /> },
   { label: "Other", value: "other", icon: <UserCircle2 className="mr-1 h-4 w-4" /> },
-];
-
-const accountTypes = [
-  { label: "Personal", value: "personal", icon: <User className="mr-1 h-4 w-4" /> },
-  { label: "Business", value: "business", icon: <Building2 className="mr-1 h-4 w-4" /> },
-];
-
-const needsList = [
-  { label: "Buy", value: "buy", icon: <Clipboard className="mr-1 h-4 w-4" /> },
-  { label: "Sell", value: "sell", icon: <Clipboard className="mr-1 h-4 w-4" /> },
-  { label: "Service", value: "service", icon: <Clipboard className="mr-1 h-4 w-4" /> },
-  { label: "Other", value: "other", icon: <Clipboard className="mr-1 h-4 w-4" /> },
 ];
 
 export default function SignIn() {
@@ -195,21 +183,6 @@ export default function SignIn() {
               </RadioGroup>
             </div>
             <div>
-              <Label>Account Type</Label>
-              <RadioGroup
-                className="flex flex-row gap-4"
-                value={form.account_type}
-                onValueChange={val => handleRadioChange("account_type", val)}
-                required
-              >
-                {accountTypes.map(type => (
-                  <RadioGroupItem value={type.value} key={type.value} id={"acc" + type.value} className="flex items-center">
-                    <span className="flex items-center">{type.icon} {type.label}</span>
-                  </RadioGroupItem>
-                ))}
-              </RadioGroup>
-            </div>
-            <div>
               <Label>Your Needs</Label>
               <Textarea
                 id="needs"
@@ -233,3 +206,5 @@ export default function SignIn() {
     </div>
   );
 }
+
+// (This file is now 217 lines. It's getting large! Please consider asking me to refactor it for you.)

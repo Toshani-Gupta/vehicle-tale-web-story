@@ -34,28 +34,28 @@ const Header = () => {
         <div className="flex items-center">
           <h1 className={`font-bold transition-all duration-300 ${
             scrolled ? "text-xl" : "text-2xl"
-          }`}>Tosh Automobile</h1>
+          } text-white`}>Tosh Automobile</h1>
         </div>
 
         <div className="hidden md:flex items-center space-x-6">
           <nav className="flex items-center space-x-6">
-            <Link to="/" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <Home className="mr-1 h-4 w-4" />
               <span>HOME</span>
             </Link>
-            <Link to="/about" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/about" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <User className="mr-1 h-4 w-4" />
               <span>ABOUT US</span>
             </Link>
-            <Link to="/services" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/services" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <FileText className="mr-1 h-4 w-4" />
               <span>SERVICES</span>
             </Link>
-            <Link to="/resources" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/resources" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <Bookmark className="mr-1 h-4 w-4" />
               <span>RESOURCES</span>
             </Link>
-            <Link to="/account" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/account" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <User className="mr-1 h-4 w-4" />
               <span>ACCOUNT</span>
             </Link>
@@ -73,7 +73,7 @@ const Header = () => {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            <Menu className="h-6 w-6" />
+            <Menu className="h-6 w-6 text-white" />
           </button>
         </div>
       </div>
@@ -81,27 +81,27 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-vehicle-primary py-4 px-4 animate-fade-in">
           <nav className="flex flex-col space-y-4">
-            <Link to="/" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <Home className="mr-2 h-4 w-4" />
               <span>HOME</span>
             </Link>
-            <Link to="/about" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/about" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <User className="mr-2 h-4 w-4" />
               <span>ABOUT US</span>
             </Link>
-            <Link to="/services" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/services" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <FileText className="mr-2 h-4 w-4" />
               <span>SERVICES</span>
             </Link>
-            <Link to="/resources" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/resources" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <Bookmark className="mr-2 h-4 w-4" />
               <span>RESOURCES</span>
             </Link>
-            <Link to="/account" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/account" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <User className="mr-2 h-4 w-4" />
               <span>ACCOUNT</span>
             </Link>
-            <Link to="/sign-in" className="flex items-center hover:text-vehicle-secondary transition duration-200">
+            <Link to="/sign-in" className="flex items-center text-white hover:text-vehicle-secondary transition duration-200">
               <User className="mr-2 h-4 w-4" />
               <span>GET STARTED</span>
             </Link>
